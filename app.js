@@ -1,3 +1,17 @@
+const canvas = document.getElementById('drawingCanvas');
+const widthInput = document.getElementById('canvasWidth');
+const heightInput = document.getElementById('canvasHeight');
+
+widthInput.addEventListener('input', (e) => {
+    const value = Math.max(100, parseInt(e.target.value) || 0);
+    canvas.setAttribute('width', value);
+});
+
+heightInput.addEventListener('input', (e) => {
+    const value = Math.max(100, parseInt(e.target.value) || 0);
+    canvas.setAttribute('height', value);
+});
+
 class CircuitPatternApp {
     constructor() {
         this.canvas = document.getElementById('drawingCanvas');
