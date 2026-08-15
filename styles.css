@@ -316,16 +316,33 @@ header h1 {
     background: #c82333;
 }
 
+/* 1. Ensure the overall layout container doesn't breach the viewport width */
+.container {
+    width: 100%;             /* Added to prevent expanding beyond parent */
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* 2. Fix the flexbox collapse behavior for the canvas container */
 .canvas-container {
     flex: 1;
+    min-width: 0;            /* CRITICAL: Allows flex child to shrink below its content size */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* Changed from center so origin isn't clipped when scrolled */
     background: #1a1a1a;
     border-radius: 8px;
     padding: 20px;
+    overflow-x: auto;        /* Scrollbar will now trigger here */
+    overflow-y: hidden;
 }
 
+/* 3. Keep canvas at fixed explicit size so it triggers horizontal overflow */
 #drawingCanvas {
+    flex-shrink: 0;          /* Prevents the SVG canvas from shrinking itself */
     border: 2px solid #333;
     border-radius: 8px;
     background: #000;
